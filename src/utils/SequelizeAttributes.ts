@@ -1,5 +1,5 @@
 const sequelize = require('sequelize')
-const { MockQueryInterface, read } = require('utils/ReaderMigrationSequelize')
+const { MockQueryInterface, read } = require('./ReaderMigrationSequelize')
 
 const newMockQueryInterface = new MockQueryInterface()
 

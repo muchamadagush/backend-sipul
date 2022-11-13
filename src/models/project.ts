@@ -25,12 +25,13 @@ export interface ProjectInstance
 const Project = db.sequelize.define<ProjectInstance>(
   'Projects',
   {
-    ...SequelizeAttributes.Blogs,
+    ...SequelizeAttributes.Projects,
   },
   { paranoid: true }
 )
 
-Project.associate = (models: any) => {
-}
+// Project.associate = (models) => {
+//   //
+// }
 
 export default Project
