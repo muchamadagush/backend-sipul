@@ -25,3 +25,14 @@ routes.post(
     return res.status(200).json(data)
   }
 )
+
+routes.get(
+  '/project/:id',
+    async function findById(req: Request, res: Response) {
+    const { id } = req.params
+    
+    const data = await ProjectService.findById(id)
+
+    return res.status(200).json(data)
+  }
+)

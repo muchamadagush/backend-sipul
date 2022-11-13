@@ -64,6 +64,23 @@ class ProjectService {
       }
     }
   }
+
+  /**
+   *
+   * @param req Request
+   */
+   public static async findById(id: string) {
+    const data = await Project.findByPk(id)
+
+    if (data?.technologies) {
+      data.technologies = JSON.parse(data.technologies)
+    }
+
+    return {
+      message: `Data sudah diterima`,
+      data,
+    }
+  }
 }
 
 export default ProjectService

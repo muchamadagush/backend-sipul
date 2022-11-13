@@ -2,3 +2,5 @@
 {"level":"error","message":"404 - Not Found - /v1/projects - GET - ::1"}
 {"level":"error","message":"404 - Not Found - /v1/projects - GET - ::1"}
 {"level":"error","message":"404 - Not Found - /v1/job?description=and&location=berlin&fulltime=false - GET - ::1"}
+{"level":"error","message":"404 - Not Found - /v1/project/e8249269-9a90-4f49-af83-7dcf05606f4e - GET - ::1"}
+{"level":"error","message":"404 - Not Found - /v1/project/e8249269-9a90-4f49-af83-7dcf05606f4e - GET - ::1"}
