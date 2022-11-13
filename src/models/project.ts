@@ -9,11 +9,12 @@ export interface ProjectAttributes {
   slug: string,
   description: string,
   mainTechnology: string,
+  technologies?: string | null,
   thumbnailImg: string,
   demoLink: string,
   repoLink: string,
-  createdAt: Date,
-  updatedAt: Date,
+  createdAt?: Date | null,
+  updatedAt?: Date | null,
 }
 
 interface ProjectCreationAttributes extends Optional<ProjectAttributes, 'id'> { }

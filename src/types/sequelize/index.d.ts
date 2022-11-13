@@ -44,6 +44,9 @@ interface Associate {
 
 declare module 'sequelize' {
   class Sequelize extends sequelize {
+    static transaction() {
+      throw new Error('Method not implemented.')
+    }
     public define<M extends Model, TCreationAttributes = M['_attributes']>(
       modelName: string,
       attributes: ModelAttributes<M, TCreationAttributes>,
