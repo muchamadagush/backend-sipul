@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { Request, Response } from 'express'
 import { Sequelize } from 'sequelize'
+import ResponseError from '../../modules/Response/ResponseError'
 
 import routes from '../../routes/public'
 import ProjectService from './project.service'
@@ -34,5 +35,27 @@ routes.get(
     const data = await ProjectService.findById(id)
 
     return res.status(200).json(data)
+  }
+)
+
+
+
+routes.delete(
+  '/project/:id',
+    async function deleteProject(req: Request, res: Response) {
+    const { id } = req.params
+    
+    const data = await ProjectService.findById(id)
+
+    if (!data.data) {
+      return res.status(404).json({ message: 'Data tidak ditemukan'})
+    }
+    
+    await ProjectService.deleteProject(id, true)
+
+    return res.status(200).json({
+      message: 'Berhasil menghapus data',
+      data: data.data,
+    })
   }
 )

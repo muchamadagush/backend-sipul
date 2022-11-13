@@ -21,10 +21,8 @@ class ProjectService {
    *
    * @param req Request
    */
-   public static async getAllProject(req: Request) {
-    const data = await Project.findAll({
-      
-    })
+  public static async getAllProject(req: Request) {
+    const data = await Project.findAll({})
 
     const count = await Project.count()
 
@@ -39,7 +37,7 @@ class ProjectService {
    *
    * @param req Request
    */
-   public static async createProject(formData: createProject) {
+  public static async createProject(formData: createProject) {
     const txn = await db.sequelize.transaction()
     try {
       const newData = {
@@ -49,7 +47,7 @@ class ProjectService {
         slug: formData.title.split(' ').join('-')
       }
       const data = await Project.create(newData, { transaction: txn })
-  
+
       await txn.commit()
 
       return {
@@ -69,7 +67,7 @@ class ProjectService {
    *
    * @param req Request
    */
-   public static async findById(id: string) {
+  public static async findById(id: string) {
     const data = await Project.findByPk(id)
 
     if (data?.technologies) {
@@ -80,6 +78,23 @@ class ProjectService {
       message: `Data sudah diterima`,
       data,
     }
+  }
+
+  /**
+   *
+   * @param id string
+   * @param isForce boolean
+   */
+  public static async deleteProject(id: string, isForce: boolean) {
+    const txn = await db.sequelize.transaction()
+
+    await Project.destroy({
+      where: { id },
+      force: isForce,
+      transaction: txn
+    })
+
+    await txn.commit()
   }
 }
 
