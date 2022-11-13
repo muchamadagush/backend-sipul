@@ -1,0 +1,9 @@
+{
+  "name": "backend-portfolio",
+  "version": "1.0.0",
+  "description": "backend for portfolio app",
+  "main": "index.js",
+  "repository": "https://github.com/muchamadagush/backend-portfolio",
+  "author": "Muchamad Agus Hermawan",
+  "license": "MIT"
+}
