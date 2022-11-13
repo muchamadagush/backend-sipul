@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "backend for portfolio app",
   "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
   "repository": "https://github.com/muchamadagush/backend-portfolio",
   "author": "Muchamad Agus Hermawan",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
 }
