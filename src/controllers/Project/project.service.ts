@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 import { Transaction } from 'sequelize'
 import db from '../../models/_instance'
 
-const { Project } = models
+const { Project, File } = models
 
 interface createProject {
   title: string
@@ -22,7 +22,12 @@ class ProjectService {
    * @param req Request
    */
   public static async getAllProject(req: Request) {
-    const data = await Project.findAll({})
+    const data = await Project.findAll({
+      include: {
+        model: File,
+        as: 'thumbnailImg',
+      },
+    })
 
     const count = await Project.count()
 

@@ -31,8 +31,11 @@ const Project = db.sequelize.define<ProjectInstance>(
   { paranoid: true }
 )
 
-// Project.associate = (models) => {
-//   //
-// }
+Project.associate = (models: any) => {
+  Project.belongsTo(models.File, {
+    foreignKey: 'fileId',
+    as: 'thumbnailImg',
+  })
+}
 
 export default Project
