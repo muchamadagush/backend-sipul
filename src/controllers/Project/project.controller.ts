@@ -7,12 +7,12 @@ import ProjectService from './project.service'
 
 routes.get(
   '/project',
-    async function findAll(req: Request, res: Response) {
+  asyncHandler(async function findAll(req: Request, res: Response) {
 
     const data = await ProjectService.getAllProject(req)
 
     return res.status(200).json(data)
-  }
+  })
 )
 
 routes.post(
