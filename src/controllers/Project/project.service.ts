@@ -9,11 +9,11 @@ const { Project } = models
 interface createProject {
   title: string
   description: string
-  thumbnailImg: string
   mainTechnology: string
   technologies: string[]
   demoLink: string
   repoLink: string
+  fileId: string
 }
 
 class ProjectService {
@@ -39,27 +39,21 @@ class ProjectService {
    */
   public static async createProject(formData: createProject) {
     const txn = await db.sequelize.transaction()
-    try {
-      const newData = {
-        ...formData,
-        id: uuid(),
-        technologies: JSON.stringify(formData.technologies),
-        slug: formData.title.split(' ').join('-')
-      }
-      const data = await Project.create(newData, { transaction: txn })
+    const newData = {
+      ...formData,
+      id: uuid(),
+      technologies: JSON.stringify(formData.technologies),
+      slug: formData.title.split(' ').join('-').toLowerCase(),
+    }
+    const data = await Project.create(newData, { transaction: txn })
 
-      await txn.commit()
+    await txn.commit()
 
-      return {
-        message: 'Berhasil menambahkan data',
-        data,
-      }
-    } catch (error) {
-      txn.rollback()
-      return {
-        message: 'Gagal menambahkan data',
-        data: null,
-      }
+    data.technologies = JSON.parse(data.technologies)
+
+    return {
+      message: 'Berhasil menambahkan data',
+      data,
     }
   }
 

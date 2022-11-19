@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { Request, Response } from 'express'
+import asyncHandler from '../../helpers/asyncHandler'
 
 import routes from '../../routes/public'
 import ProjectService from './project.service'
@@ -16,13 +17,13 @@ routes.get(
 
 routes.post(
   '/project',
-    async function findAll(req: Request, res: Response) {
+  asyncHandler(async function createProject(req: Request, res: Response) {
     const formData = req.body
     
     const data = await ProjectService.createProject(formData)
 
-    return res.status(200).json(data)
-  }
+    return res.status(201).json(data)
+  })
 )
 
 routes.get(
