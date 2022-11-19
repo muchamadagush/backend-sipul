@@ -16,7 +16,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var SequelizeAttributes_1 = __importDefault(require("../utils/SequelizeAttributes"));
 var _instance_1 = __importDefault(require("./_instance"));
-var Project = _instance_1.default.sequelize.define('Projects', __assign({}, SequelizeAttributes_1.default.Blogs), { paranoid: true });
-Project.associate = function (models) {
-};
+var Project = _instance_1.default.sequelize.define('Projects', __assign({}, SequelizeAttributes_1.default.Projects), { paranoid: true });
+// Project.associate = (models) => {
+//   //
+// }
 exports.default = Project;

@@ -1,7 +1,9 @@
 import Project from './project'
+import File from './file'
 
 const models = {
   Project,
+  File,
 }
 
 export default models

@@ -5,3 +5,4 @@ const router = express.Router()
 export default router
 
 require('../controllers/Project/project.controller')
+require('../controllers/Upload/upload.controller')

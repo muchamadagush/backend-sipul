@@ -8,8 +8,7 @@
     "type-check": "tsc --noEmit",
     "before-build": "npm run clean && yarn && npm run type-check",
     "build": "npm run before-build && tsc -p .",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon --exec babel-node --extensions \".ts\" ./src/bin/server.ts",
     "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
     "db:migrate": "npx sequelize-cli db:migrate",
     "db:migrate:fresh": "npx sequelize-cli db:migrate:undo:all && npm run db:migrate",
@@ -34,6 +33,7 @@
     "mysql2": "^2.3.3",
     "sequelize": "^6.25.5",
     "sequelize-cli": "^6.5.2",
+    "slugify": "^1.6.5",
     "uuid": "^9.0.0",
     "winston": "^3.8.2"
   },

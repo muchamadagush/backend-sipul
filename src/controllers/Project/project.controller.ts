@@ -1,7 +1,5 @@
 /* eslint-disable no-await-in-loop */
 import { Request, Response } from 'express'
-import { Sequelize } from 'sequelize'
-import ResponseError from '../../modules/Response/ResponseError'
 
 import routes from '../../routes/public'
 import ProjectService from './project.service'
@@ -30,7 +28,7 @@ routes.post(
 routes.get(
   '/project/:id',
     async function findById(req: Request, res: Response) {
-    const { id } = req.params
+    const { id } = req.getParams()
     
     const data = await ProjectService.findById(id)
 

@@ -8,10 +8,9 @@ var models = {
     Project: project_1.default,
 };
 exports.default = models;
-Object.entries(models).map(function (_a) {
-    var model = _a[1];
-    if (model === null || model === void 0 ? void 0 : model.associate) {
-        model.associate(models);
-    }
-    return model;
-});
+// Object.entries(models).map(([, model]) => {
+//   if (model.associate) {
+//     model.associate(models)
+//   }
+//   return model
+// })
