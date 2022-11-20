@@ -19,7 +19,7 @@ routes.get(
 routes.post(
   '/project',
   asyncHandler(async function createProject(req: Request, res: Response) {
-    const formData = req.body
+    const formData = req.getBody()
     
     const data = await ProjectService.createProject(formData)
 
@@ -43,7 +43,7 @@ routes.get(
 routes.delete(
   '/project/:id',
   asyncHandler(async function deleteProject(req: Request, res: Response) {
-    const { id } = req.params
+    const { id } = req.getParams()
     
     const data = await ProjectService.findById(id)
 
