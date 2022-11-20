@@ -8,7 +8,7 @@ import ProjectService from './project.service'
 
 routes.get(
   '/project',
-  asyncHandler(async function findAll(req: Request, res: Response) {
+  asyncHandler(async function findAll(req: Request, res: Response): Promise<any> {
 
     const data = await ProjectService.getAllProject(req)
 
@@ -18,7 +18,7 @@ routes.get(
 
 routes.post(
   '/project',
-  asyncHandler(async function createProject(req: Request, res: Response) {
+  asyncHandler(async function createProject(req: Request, res: Response): Promise<any> {
     const formData = req.getBody()
     
     const data = await ProjectService.createProject(formData)
@@ -29,7 +29,7 @@ routes.post(
 
 routes.get(
   '/project/:id',
-  asyncHandler(async function findById(req: Request, res: Response) {
+  asyncHandler(async function findById(req: Request, res: Response): Promise<any> {
     const { id } = req.getParams()
     
     const data = await ProjectService.findById(id)
@@ -42,7 +42,7 @@ routes.get(
 
 routes.delete(
   '/project/:id',
-  asyncHandler(async function deleteProject(req: Request, res: Response) {
+  asyncHandler(async function deleteProject(req: Request, res: Response): Promise<any> {
     const { id } = req.getParams()
     
     const data = await ProjectService.findById(id)
