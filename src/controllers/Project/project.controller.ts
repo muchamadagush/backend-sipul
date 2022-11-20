@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { Request, Response } from 'express'
 import asyncHandler from '../../helpers/asyncHandler'
+import BuildResponse from '../../modules/Response/BuildResponse'
 import ResponseError from '../../modules/Response/ResponseError'
 
 import routes from '../../routes/public'
@@ -38,8 +39,6 @@ routes.get(
   })
 )
 
-
-
 routes.delete(
   '/project/:id',
   asyncHandler(async function deleteProject(req: Request, res: Response): Promise<any> {
@@ -57,5 +56,19 @@ routes.delete(
       message: 'Berhasil menghapus data',
       data: data.data,
     })
+  })
+)
+
+routes.put(
+  '/project/:id',
+  asyncHandler(async function updateProject(req: Request, res: Response): Promise<any> {
+    const { id } = req.getParams()
+    const formData = req.getBody()
+    
+    await ProjectService.updateProject(id, formData)
+
+    const buildResponse = BuildResponse.updated({})
+
+    return res.status(201).json(buildResponse)
   })
 )

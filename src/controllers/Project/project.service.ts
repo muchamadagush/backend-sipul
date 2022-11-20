@@ -1,7 +1,6 @@
 import models from '../../models'
 import { Request } from 'express'
 import { v4 as uuid } from 'uuid'
-import { Transaction } from 'sequelize'
 import db from '../../models/_instance'
 import ResponseError from '../../modules/Response/ResponseError'
 
@@ -95,8 +94,32 @@ class ProjectService {
     await Project.destroy({
       where: { id },
       force: isForce,
-      transaction: txn
+      transaction: txn,
     })
+
+    await txn.commit()
+  }
+
+  /**
+   *
+   * @param id string
+   * @param formData boolean
+   */
+  public static async updateProject(id: string, formData: createProject) {
+    const txn = await db.sequelize.transaction()
+
+    await this.findById(id)
+
+    await Project.update(
+      {
+        ...formData,
+        technologies: JSON.stringify(formData.technologies),
+      },
+      {
+        where: { id },
+        transaction: txn,
+      }
+    )
 
     await txn.commit()
   }

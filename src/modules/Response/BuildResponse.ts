@@ -8,7 +8,7 @@ type DataResponse =
 class BuildResponse {
   private static baseResponse(dataResponse: DataResponse) {
     const {
-      message = '[buildResponse.base]',
+      message = 'Data sudah diterima',
       code = 200,
       ...rest
     } = dataResponse
@@ -32,7 +32,7 @@ class BuildResponse {
   public static created(dataResponse: DataResponse) {
     return this.baseResponse({
       code: 201,
-      message: '[buildResponse.create]',
+      message: 'Data berhasil dibuat',
       ...dataResponse,
     })
   }
@@ -42,7 +42,7 @@ class BuildResponse {
    */
   public static updated(dataResponse: DataResponse) {
     return this.baseResponse({
-      message: '[buildResponse.update]',
+      message: 'Data berhasil diperbarui',
       ...dataResponse,
     })
   }
@@ -52,7 +52,7 @@ class BuildResponse {
    */
   public static deleted(dataResponse: DataResponse) {
     return this.baseResponse({
-      message: '[buildResponse.delete]',
+      message: 'Data berhasil dihapus',
       ...dataResponse,
     })
   }
