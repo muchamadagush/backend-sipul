@@ -19,7 +19,7 @@ dotenv.config()
 
 const app: Application = express()
 
-app.use(helmet())
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
 app.use(cors())
 app.use(logger('combined', { stream: winstonStream }))
 app.use(bodyParser.json({ limit: '100mb', type: 'application/json' }))
