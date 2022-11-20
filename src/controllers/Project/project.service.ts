@@ -3,6 +3,7 @@ import { Request } from 'express'
 import { v4 as uuid } from 'uuid'
 import { Transaction } from 'sequelize'
 import db from '../../models/_instance'
+import ResponseError from '../../modules/Response/ResponseError'
 
 const { Project, File } = models
 
@@ -68,6 +69,10 @@ class ProjectService {
    */
   public static async findById(id: string) {
     const data = await Project.findByPk(id)
+
+    if (!data) {
+      throw new ResponseError.NotFound('Data tidak ditemukan')
+    }
 
     if (data?.technologies) {
       data.technologies = JSON.parse(data.technologies)
