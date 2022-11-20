@@ -69,6 +69,19 @@ routes.put(
 
     const buildResponse = BuildResponse.updated({})
 
-    return res.status(201).json(buildResponse)
+    return res.status(200).json(buildResponse)
+  })
+)
+
+routes.get(
+  '/project/find-by-slug/:slug',
+  asyncHandler(async function findById(req: Request, res: Response): Promise<any> {
+    const { slug } = req.getParams()
+    
+    const data = await ProjectService.findBySlug(slug)
+
+    const buildResponse = BuildResponse.get({data})
+
+    return res.status(200).json(buildResponse)
   })
 )

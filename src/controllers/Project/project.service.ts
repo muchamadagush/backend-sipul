@@ -123,6 +123,26 @@ class ProjectService {
 
     await txn.commit()
   }
+
+  /**
+   *
+   * @param req Request
+   */
+   public static async findBySlug(slug: string) {
+    const data = await Project.findOne({
+      where: { slug }
+    })
+
+    if (!data) {
+      throw new ResponseError.NotFound('Data tidak ditemukan')
+    }
+
+    if (data?.technologies) {
+      data.technologies = JSON.parse(data.technologies)
+    }
+
+    return data
+  }
 }
 
 export default ProjectService
