@@ -114,6 +114,7 @@ class ProjectService {
       {
         ...formData,
         technologies: JSON.stringify(formData.technologies),
+        slug: formData.title.split(' ').join('-').toLowerCase(),
       },
       {
         where: { id },
