@@ -131,6 +131,10 @@ class ProjectService {
    */
    public static async findBySlug(slug: string) {
     const data = await Project.findOne({
+      include: {
+        model: File,
+        as: 'thumbnailImg',
+      },
       where: { slug }
     })
 
