@@ -15,7 +15,7 @@ routes.post(
   '/upload',
   uploadFile,
   setFileToBody,
-  asyncHandler(async function createData(req: Request, res: Response) {
+  asyncHandler(async function createData(req: Request, res: Response): Promise<any> {
     const formData = req.getBody()
 
     const data = await uploadService.createUploadFile(formData.dokumen)
