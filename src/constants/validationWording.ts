@@ -1,14 +1,14 @@
 export default {
-  invalid: (name: string) => `${name} [wording.invalid]`,
-  minLength: (min: number) => `[wording.minPassword] ${min} [wording.number]`,
+  invalid: (name: string) => `${name} tidak valid`,
+  minLength: (min: number) => `password minimal ${min} karakter`,
   minArrLength: (name: string, min: number) =>
     `[wording.inputMinimum] ${min} ${name}`,
-  positive: (name: string) => `${name} [wording.positiveNumber]`,
-  required: (name: string) => `${name} [wording.notEmpty]`,
-  notFound: (name: string) => `${name} [wording.notFound]`,
-  incorrect: (name: string) => `${name} [wording.wrong]`,
+  positive: (name: string) => `${name} harus angka positif`,
+  required: (name: string) => `${name} tidak boleh kosong`,
+  notFound: (name: string) => `${name} tidak ditemukan`,
+  incorrect: (name: string) => `${name} salah`,
   duplicate: (name: string, value: string) =>
-    `${name} ${value} [wording.alreadyTaken]`,
+    `${name} ${value} sudah dipakai`,
   oneOf: (name: string, ...args: Array<string | number>) =>
-    `${name} [wording.oneOf] ${args.map((v) => `'${v}'`).join(', ')}`,
+    `${name} salah satu dari ${args.map((v) => `'${v}'`).join(', ')}`,
 }

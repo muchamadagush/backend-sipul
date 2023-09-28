@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import ExpressErrorSequelize from './middlewares/ExpressErrorSequelize'
 import ExpressErrorResponse from './middlewares/ExpressErrorResponse'
 import ExpressAutoHandleTransaction from './middlewares/ExpressAutoHandleTransaction'
+import ExpressErrorYup from './middlewares/ExpressErrorYup'
 import createError from 'http-errors'
 import indexRouter from './routes'
 import helmet from 'helmet'
@@ -18,6 +19,10 @@ import winstonLogger, { winstonStream } from './config/winston'
 dotenv.config()
 
 const app: Application = express()
+
+// view engine setup
+app.set('views', path.join(`${__dirname}/../`, 'views'))
+app.set('view engine', 'pug')
 
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
 app.use(cors())
@@ -47,6 +52,7 @@ async function handleRollbackTransaction(
   next(err)
 }
 app.use('/v1', handleRollbackTransaction)
+app.use('/v1', ExpressErrorYup)
 app.use('/v1', ExpressErrorSequelize)
 app.use('/v1', ExpressErrorResponse)
 app.use(ExpressAutoHandleTransaction)

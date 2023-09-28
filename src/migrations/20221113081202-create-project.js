@@ -2,33 +2,40 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Projects', {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      title: {
-        type: Sequelize.STRING
+      fullName: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      slug: {
-        type: Sequelize.STRING
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
-      description: {
-        type: Sequelize.TEXT
+      role: {
+        type: Sequelize.ENUM('Super Admin', 'Creator'),
+        allowNull: false,
+        defaultValue: 'Creator'
       },
-      mainTechnology: {
-        type: Sequelize.STRING
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      thumbnailImg: {
-        type: Sequelize.TEXT
+      status: {
+        type: Sequelize.ENUM('Active', 'Suspend'),
+        allowNull: false,
+        defaultValue: 'Active'
       },
-      demoLink: {
-        type: Sequelize.STRING
-      },
-      repoLink: {
-        type: Sequelize.STRING
+      avatar: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        defaultValue: null
       },
       createdAt: {
         allowNull: false,
@@ -46,6 +53,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Projects');
+    await queryInterface.dropTable('Users');
   }
 };

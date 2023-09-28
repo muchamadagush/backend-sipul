@@ -1,9 +1,9 @@
-import Project from './project'
 import File from './file'
+import User from './user'
 
 const models = {
-  Project,
   File,
+  User,
 }
 
 export default models

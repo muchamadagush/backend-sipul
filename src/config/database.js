@@ -10,7 +10,7 @@ module.exports = {
     dialect: process.env.DB_CONNECTION,
     operatorsAliases: process.env.DB_OPERATOR_ALIAS,
     timezone: process.env.DB_TIMEZONE,
-    logging: true,
+    logging: false,
   },
   staging: {
     username: process.env.STAGING_DB_USERNAME,
