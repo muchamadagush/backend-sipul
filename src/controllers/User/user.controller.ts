@@ -3,9 +3,12 @@ import asyncHandler from '../../helpers/asyncHandler'
 import routes from '../../routes/public'
 import UserService from './user.service'
 import BuildResponse from '../../modules/Response/BuildResponse'
+import AuthorizationSuperAdmin from '../../middlewares/AuthorizationSuperAdmin'
+import Authorization from '../../middlewares/Authorization'
 
 routes.get(
   '/user',
+  AuthorizationSuperAdmin,
   asyncHandler(async function getAll(req: Request, res: Response): Promise<any> {
     const data = await UserService.getAllUser(req)
 
@@ -16,6 +19,7 @@ routes.get(
 
 routes.post(
   '/user',
+  AuthorizationSuperAdmin,
   asyncHandler(async function create(req: Request, res: Response): Promise<any> {
     const formData = req.getBody()
     const txn = await req.getTransaction()
@@ -31,6 +35,7 @@ routes.post(
 
 routes.get(
   '/user/:id',
+  Authorization,
   asyncHandler(async function getUserById(req: Request, res: Response): Promise<any> {
     const { id } = req.getParams()
 
@@ -43,6 +48,7 @@ routes.get(
 
 routes.put(
   '/user/:id',
+  Authorization,
   asyncHandler(async function update(req: Request, res: Response): Promise<any> {
     const { id } = req.getParams()
     const formData = req.getBody()
@@ -59,6 +65,7 @@ routes.put(
 
 routes.delete(
   '/user/:id',
+  AuthorizationSuperAdmin,
   asyncHandler(async function deleted(req: Request, res: Response): Promise<any> {
     const { id } = req.getParams()
     const txn = await req.getTransaction()
