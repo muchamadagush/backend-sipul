@@ -88,7 +88,7 @@ export default class BaseRepository<
     })
 
     return {
-      message: `${data.length} [dictionary.received].`,
+      message: `${data.length} data sudah diterima`,
       data,
       total,
       where: queryFind.where,

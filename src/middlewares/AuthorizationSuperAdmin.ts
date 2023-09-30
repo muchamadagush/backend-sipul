@@ -19,7 +19,7 @@ async function AuthorizationSuperAdmin(
 
   const userData = await UserService.verifyActiveUser(token?.data?.id)
 
-  if (userData.RoleId !== 'Super Admin') {
+  if (userData.role !== 'Super Admin') {
     throw new ResponseError.Forbidden(
       'this endpoint can only be accessed by users who have the superadmin role'
     )
