@@ -1,5 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 import SequelizeAttributes from '../utils/SequelizeAttributes'
+import bcrypt from 'bcryptjs'
 
 import db from './_instance'
 
@@ -15,6 +16,16 @@ export interface UserAttributes {
   createdAt?: Date
   updatedAt?: Date
   deletedAt?: Date
+}
+
+export enum StatusUser {
+  'Suspend' = 'Suspend',
+  'Active' = 'Active',
+}
+
+export interface LoginAttributes {
+  email: string
+  password: string
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
@@ -46,6 +57,17 @@ const User = db.sequelize.define<UserInstance>(
     },
   }
 )
+
+// Compare password
+User.prototype.comparePassword = function (candidatePassword: string) {
+  console.log(candidatePassword)
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+      if (err) reject(err)
+      resolve(isMatch)
+    })
+  })
+}
 
 User.associate = (models: any) => {
   User.belongsTo(models.File, {

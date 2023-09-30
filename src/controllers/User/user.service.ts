@@ -129,6 +129,20 @@ class UserService {
 
     return true
   }
+
+  /**
+   *
+   * @param id
+   */
+  public static async verifyActiveUser(id: string) {
+    const userData = await User.findByPk(id, { paranoid: false })
+
+    if (!userData || userData.deletedAt) {
+      throw new ResponseError.Unauthorized('Akun Anda telah dihapus')
+    }
+
+    return userData
+  }
 }
 
 export default UserService

@@ -6,3 +6,4 @@ export default router
 
 require('../controllers/Upload/upload.controller')
 require('../controllers/User/user.controller')
+require('../controllers/Auth/auth.controller')
