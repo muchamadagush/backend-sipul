@@ -5,6 +5,6 @@
 build/*
 !build/index.js
 
-dist/*
+/dist/*
 storage/*
 src/types/sequelize/index.d.ts

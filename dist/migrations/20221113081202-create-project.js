@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -40,33 +40,40 @@ module.exports = {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, queryInterface.createTable('Projects', {
+                    case 0: return [4 /*yield*/, queryInterface.createTable('Users', {
                             id: {
                                 allowNull: false,
                                 primaryKey: true,
                                 type: Sequelize.UUID,
                                 defaultValue: Sequelize.UUIDV4,
                             },
-                            title: {
-                                type: Sequelize.STRING
+                            fullName: {
+                                type: Sequelize.STRING,
+                                allowNull: false,
                             },
-                            slug: {
-                                type: Sequelize.STRING
+                            email: {
+                                type: Sequelize.STRING,
+                                allowNull: false,
+                                unique: true
                             },
-                            description: {
-                                type: Sequelize.TEXT
+                            role: {
+                                type: Sequelize.ENUM('Super Admin', 'Creator'),
+                                allowNull: false,
+                                defaultValue: 'Creator'
                             },
-                            mainTechnology: {
-                                type: Sequelize.STRING
+                            password: {
+                                type: Sequelize.STRING,
+                                allowNull: false,
                             },
-                            thumbnailImg: {
-                                type: Sequelize.TEXT
+                            status: {
+                                type: Sequelize.ENUM('Active', 'Suspend'),
+                                allowNull: false,
+                                defaultValue: 'Active'
                             },
-                            demoLink: {
-                                type: Sequelize.STRING
-                            },
-                            repoLink: {
-                                type: Sequelize.STRING
+                            avatar: {
+                                type: Sequelize.UUID,
+                                allowNull: true,
+                                defaultValue: null
                             },
                             createdAt: {
                                 allowNull: false,
@@ -93,7 +100,7 @@ module.exports = {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, queryInterface.dropTable('Projects')];
+                    case 0: return [4 /*yield*/, queryInterface.dropTable('Users')];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
