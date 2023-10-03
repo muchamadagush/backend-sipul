@@ -36,3 +36,16 @@ routes.post(
     return res.status(201).json(buildResponse)
   })
 )
+
+routes.get(
+  '/category/:id',
+  Authorization,
+  asyncHandler(async function getById(req: Request, res: Response): Promise<any> {
+    const { id } = req.getParams()
+
+    const data = await categoryService._model.findByPk(id)
+
+    const buildResponse = BuildResponse.get({ data })
+    return res.status(200).json(buildResponse)
+  })
+)

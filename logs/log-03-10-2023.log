@@ -1,0 +1,2 @@
+{"level":"error","message":"500 - Argument passed to findByPk is invalid: [object Object] - /v1/category/6fd5a4d9-c6f2-4964-85f9-da8facf188b4 - GET - ::1"}
+{"level":"error","message":"500 - Argument passed to findByPk is invalid: [object Object] - /v1/category/6fd5a4d9-c6f2-4964-85f9-da8facf188b4 - GET - ::1"}
