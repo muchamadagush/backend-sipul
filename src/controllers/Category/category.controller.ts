@@ -66,3 +66,19 @@ routes.put(
     return res.status(200).json(buildResponse)
   })
 )
+
+routes.delete(
+  '/category/:id',
+  Authorization,
+  asyncHandler(async function deleted(req: Request, res: Response): Promise<any> {
+    const { id } = req.getParams()
+    const txn = await req.getTransaction()
+
+    await categoryService.deleted(id, txn, true)
+
+    await txn.commit()
+
+    const buildResponse = BuildResponse.deleted({})
+    return res.status(200).json(buildResponse)
+  })
+)

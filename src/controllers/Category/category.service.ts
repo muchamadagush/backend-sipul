@@ -34,4 +34,14 @@ export default class CategoryService extends BaseRepository<
 
     return category
   }
+
+  async deleted(id: string, txn: Transaction, isForce: boolean = false) {
+    await this._model.destroy({
+      where: { id },
+      force: isForce,
+      transaction: txn
+    })
+
+    return true
+  }
 }
