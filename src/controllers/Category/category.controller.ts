@@ -49,3 +49,20 @@ routes.get(
     return res.status(200).json(buildResponse)
   })
 )
+
+routes.put(
+  '/category/:id',
+  Authorization,
+  asyncHandler(async function update(req: Request, res: Response): Promise<any> {
+    const { id } = req.getParams()
+    const formData = req.getBody()
+    const txn = await req.getTransaction()
+
+    const data = await categoryService.updated(id, formData, txn)
+
+    await txn.commit()
+
+    const buildResponse = BuildResponse.updated({ data })
+    return res.status(200).json(buildResponse)
+  })
+)

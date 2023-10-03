@@ -8,6 +8,14 @@ const create = yup
   })
   .required()
 
+const update = yup
+  .object()
+  .shape({
+    title: yup.string().required(validationWording.required("title")),
+  })
+  .required()
+
 export default {
   create,
+  update,
 }
