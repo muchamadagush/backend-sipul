@@ -65,4 +65,18 @@ export default class PostService extends BaseRepository<
 
     return uniqueSlug
   }
+
+  async getById(id: string) {
+    const data = await this._model.findByPk(id)
+
+    return data
+  }
+
+  async getBySlug(slug: string) {
+    const data = await this._model.findOne({
+      where: { slug }
+    })
+
+    return data
+  }
 }

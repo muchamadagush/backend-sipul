@@ -42,3 +42,27 @@ routes.post(
     return res.status(201).json(buildResponse)
   })
 )
+
+routes.get(
+  '/post/:id',
+  asyncHandler(async function getById(req: Request, res: Response): Promise<any> {
+    const { id } = req.getParams()
+
+    const data = await postService.getById(id)
+
+    const buildResponse = BuildResponse.get({ data })
+    return res.status(200).json(buildResponse)
+  })
+)
+
+routes.get(
+  '/post/get-by-slug/:slug',
+  asyncHandler(async function getBySlug(req: Request, res: Response): Promise<any> {
+    const { slug } = req.getParams()
+
+    const data = await postService.getBySlug(slug)
+
+    const buildResponse = BuildResponse.get({ data })
+    return res.status(200).json(buildResponse)
+  })
+)
