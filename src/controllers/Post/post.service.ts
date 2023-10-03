@@ -38,13 +38,31 @@ export default class PostService extends BaseRepository<
     }
   }
 
-  generateSlugFromTitle(title: string) {
+  async generateUniqueSlug(desiredSlug: string) {
+    let slug = desiredSlug
+    let counter = 1
+  
+    while (true) {
+      const existingPost = await this._model.findOne({ where: { slug } })
+  
+      if (!existingPost) {
+        return slug
+      }
+  
+      counter++
+      slug = `${desiredSlug}-${counter}`
+    }
+  };
+
+  async generateSlugFromTitle(title: string) {
     const titleWithoutQuestionMark = title.replace(/\?/g, '')
 
-    const slugOptions = {
+    const desiredSlug = slugify(titleWithoutQuestionMark, {
       lower: true,
       remove: /[*+~.()'"!:@]/g,
-    };
-    return slugify(titleWithoutQuestionMark, slugOptions);
+    })
+    const uniqueSlug = await this.generateUniqueSlug(desiredSlug)
+
+    return uniqueSlug
   }
 }

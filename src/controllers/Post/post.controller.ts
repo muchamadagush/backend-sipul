@@ -31,7 +31,7 @@ routes.post(
 
     const newValidatedData = {
       ...validatedData,
-      slug: postService.generateSlugFromTitle(validatedData.title)
+      slug: await postService.generateSlugFromTitle(validatedData.title)
     }
     
     const data = await postService._model.create(newValidatedData, { transaction: txn })
