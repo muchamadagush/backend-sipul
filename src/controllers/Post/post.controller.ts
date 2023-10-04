@@ -66,3 +66,19 @@ routes.get(
     return res.status(200).json(buildResponse)
   })
 )
+
+routes.delete(
+  '/post/:id',
+  Authorization,
+  asyncHandler(async function deleted(req: Request, res: Response): Promise<any> {
+    const { id } = req.getParams()
+    const txn = await req.getTransaction()
+
+    await postService.deleted(id, txn, true)
+
+    await txn.commit()
+
+    const buildResponse = BuildResponse.deleted({})
+    return res.status(200).json(buildResponse)
+  })
+)

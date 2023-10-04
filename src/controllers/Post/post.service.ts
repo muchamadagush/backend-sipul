@@ -4,6 +4,7 @@ import models from '../../models'
 import { PostAttributes, PostInstance } from '../../models/post'
 import slugify from 'slugify'
 import PluginSqlizeQuery from '../../modules/SqlizeQuery/PluginSqlizeQuery'
+import { Transaction } from 'sequelize'
 
 const { Post } = models
 
@@ -78,5 +79,15 @@ export default class PostService extends BaseRepository<
     })
 
     return data
+  }
+
+  async deleted(id: string, txn: Transaction, isForce: boolean = false) {
+    await this._model.destroy({
+      where: { id },
+      force: isForce,
+      transaction: txn
+    })
+
+    return true
   }
 }
