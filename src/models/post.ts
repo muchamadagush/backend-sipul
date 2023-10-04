@@ -30,7 +30,14 @@ const Post = db.sequelize.define<PostInstance>(
 )
 
 Post.associate = (models: any) => {
-  // 
+  Post.belongsTo(models.File, {
+    foreignKey: 'thumbnail',
+    as: 'Thumbnail',
+  })
+  Post.belongsToMany(models.Category, {
+    through: models.PostCategory,
+    as: 'Categories',
+  })
 }
 
 export default Post

@@ -27,7 +27,14 @@ const PostCategory = db.sequelize.define<PostCategoryInstance>(
 )
 
 PostCategory.associate = (models: any) => {
-  // 
+  PostCategory.belongsTo(models.Post, {
+    foreignKey: 'postId',
+    as: 'Post',
+  })
+  PostCategory.belongsTo(models.Category, {
+    foreignKey: 'categoryId',
+    as: 'Category',
+  })
 }
 
 export default PostCategory

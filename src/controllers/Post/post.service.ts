@@ -9,7 +9,18 @@ import ResponseError from '../../modules/Response/ResponseError'
 import useValidation from '../../helpers/useValidation'
 import schema from '../../controllers/Post/post.schema'
 
-const { Post } = models
+const { Post, File, Category } = models
+
+const includeGetAll = [
+  {
+    model: File,
+    as: 'Thumbnail',
+  },
+  {
+    model: Category,
+    as: 'Categories',
+  }
+]
 
 export default class PostService extends BaseRepository<
   PostInstance,
@@ -24,7 +35,7 @@ export default class PostService extends BaseRepository<
     const { includeCount, order, ...queryFind } = PluginSqlizeQuery.generate(
       req.query,
       this._model,
-      PluginSqlizeQuery.makeIncludeQueryable(filtered, [])
+      PluginSqlizeQuery.makeIncludeQueryable(filtered, includeGetAll)
     )
     const data = await this._model.findAll({
       ...queryFind,
@@ -71,14 +82,17 @@ export default class PostService extends BaseRepository<
   }
 
   async getById(id: string) {
-    const data = await this._model.findByPk(id)
+    const data = await this._model.findByPk(id, {
+      include: includeGetAll,
+    })
 
     return data
   }
 
   async getBySlug(slug: string) {
     const data = await this._model.findOne({
-      where: { slug }
+      where: { slug },
+      include: includeGetAll,
     })
 
     return data
