@@ -9,6 +9,7 @@ import useValidation from '../../helpers/useValidation'
 import PostCategoryService from '../../controllers/PostCategory/post_category.service'
 import { isEmpty } from 'lodash'
 import schemaPostCategory from '../../controllers/PostCategory/post_category.schema'
+import removeEmpty from '../../helpers/removeEmpty'
 
 const postService = new PostService()
 const postCategoryService = new PostCategoryService()
@@ -89,6 +90,59 @@ routes.get(
     const buildResponse = BuildResponse.get({ data })
     return res.status(200).json(buildResponse)
   })
+)
+
+routes.put(
+  '/post/:id',
+  Authorization,
+  asyncHandler(async function update(req: Request, res: Response, next: NextFunction): Promise<any> {
+    const { id } = req.getParams()
+    const formData = req.getBody()
+    const txn = await req.getTransaction()
+
+    const validatedData: any = useValidation(schema.update, formData)
+
+    const newValidatedData = {
+      ...removeEmpty(validatedData),
+      slug: await postService.generateSlugFromTitle(validatedData.title)
+    }
+
+    const data = await postService.updated(id, newValidatedData, txn)
+
+    req.setState({ data, validatedData })
+    next()
+  }),
+  asyncHandler(async function updatePostCategory(req: Request, res: Response): Promise<any> {
+    const validatedData = req.getState('validatedData')
+    const data = req.getState('data')
+    const txn = await req.getTransaction()
+
+
+    if (!isEmpty(validatedData.categoryIds)) {
+      await postCategoryService.removeNotInIds(
+        data.id,
+        validatedData.categoryIds,
+        txn,
+      )
+
+      for (const category of validatedData.categoryIds) {
+        const validatedPostCategory = useValidation(
+          schemaPostCategory.create,
+          { categoryId: category, postId: data.id }
+        )
+
+        await postCategoryService._model.findOrCreate({
+          where: validatedPostCategory,
+          transaction: txn,
+        })
+      }
+    }
+
+    await txn.commit()
+
+    const buildResponse = BuildResponse.updated({ data })
+    return res.status(200).json(buildResponse)
+  }),
 )
 
 routes.delete(

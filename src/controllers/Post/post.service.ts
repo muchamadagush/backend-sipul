@@ -5,6 +5,9 @@ import { PostAttributes, PostInstance } from '../../models/post'
 import slugify from 'slugify'
 import PluginSqlizeQuery from '../../modules/SqlizeQuery/PluginSqlizeQuery'
 import { Transaction } from 'sequelize'
+import ResponseError from '../../modules/Response/ResponseError'
+import useValidation from '../../helpers/useValidation'
+import schema from '../../controllers/Post/post.schema'
 
 const { Post } = models
 
@@ -79,6 +82,16 @@ export default class PostService extends BaseRepository<
     })
 
     return data
+  }
+
+  async updated(id: string, formData: PostAttributes, txn: Transaction) {
+    const post = await this._model.findByPk(id)
+
+    if (!post) throw new ResponseError.NotFound('Post tidak ditemukan')
+
+    await post.update(formData, { transaction: txn })
+
+    return post
   }
 
   async deleted(id: string, txn: Transaction, isForce: boolean = false) {
