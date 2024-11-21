@@ -3,13 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var file_1 = __importDefault(require("./file"));
-var user_1 = __importDefault(require("./user"));
-var category_1 = __importDefault(require("./category"));
+var type_1 = __importDefault(require("./type"));
+var scale_1 = __importDefault(require("./scale"));
+var product_1 = __importDefault(require("./product"));
+var weightscale_1 = __importDefault(require("./weightscale"));
 var models = {
-    File: file_1.default,
-    User: user_1.default,
-    Category: category_1.default,
+    Type: type_1.default,
+    Scale: scale_1.default,
+    Product: product_1.default,
+    WeightScale: weightscale_1.default,
 };
 exports.default = models;
 Object.entries(models).map(function (_a) {

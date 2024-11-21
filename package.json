@@ -9,6 +9,7 @@
     "before-build": "npm run clean && yarn && npm run type-check",
     "build": "npm run before-build && tsc -p .",
     "dev": "nodemon --exec babel-node --extensions \".ts\" ./src/bin/server.ts",
+    "serve:development": "NODE_ENV=development node ./dist/bin/server.js",
     "refresh:env-jwt": "node ./src/scripts/generateEnvJWT.ts",
     "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
     "db:migrate": "npx sequelize-cli db:migrate",
