@@ -1,5 +1,0 @@
-{"level":"error","message":"404 - Not Found - /v1/auth/login - POST - ::1"}
-{"level":"error","message":"500 - userData.comparePassword is not a function - /v1/auth/login - POST - ::1"}
-{"level":"error","message":"500 - secretOrPrivateKey must have a value - /v1/auth/login - POST - ::1"}
-{"level":"error","message":"500 - Cannot delete property '59' of [object String] - /v1/auth/login - POST - ::1"}
-{"level":"error","message":"500 - userData.comparePassword is not a function - /v1/auth/login - POST - ::1"}

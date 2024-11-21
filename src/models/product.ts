@@ -21,7 +21,7 @@ const Product = db.sequelize.define<ProductInstance>(
   {
     ...SequelizeAttributes.Products,
   },
-  { paranoid: true }
+  { paranoid: false }
 )
 
 Product.associate = (models: any) => {

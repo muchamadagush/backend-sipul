@@ -21,7 +21,7 @@ const WeightScale = db.sequelize.define<WeightScaleInstance>(
   {
     ...SequelizeAttributes.WeightScales,
   },
-  { paranoid: true }
+  { paranoid: false }
 )
 
 WeightScale.associate = (models: any) => {

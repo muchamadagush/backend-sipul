@@ -1,5 +1,0 @@
-{"level":"error","message":"500 - Converting circular structure to JSON\n    --> starting at object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     property 'parent' -> object with constructor 'Object'\n    --- property 'include' closes the circle - /v1/user/ab12d8f7-7af1-4727-a562-9ab667aed9cd - GET - ::1"}
-{"level":"error","message":"500 - User.save is not a function - /v1/user/ab12d8f7-7af1-4727-a562-9ab667aed9cd - PUT - ::1"}
-{"level":"error","message":"500 - Missing where attribute in the options parameter - /v1/user/ab12d8f7-7af1-4727-a562-9ab667aed9cd - PUT - ::1"}
-{"level":"error","message":"500 - User.delete is not a function - /v1/user/ab12d8f7-7af1-4727-a562-9ab667aed9cd - DELETE - ::1"}
-{"level":"error","message":"500 - Missing where or truncate attribute in the options parameter of model.destroy. - /v1/user/ab12d8f7-7af1-4727-a562-9ab667aed9cd - DELETE - ::1"}

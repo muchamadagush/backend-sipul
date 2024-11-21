@@ -21,7 +21,7 @@ const Scale = db.sequelize.define<ScaleInstance>(
   {
     ...SequelizeAttributes.Scales,
   },
-  { paranoid: true }
+  { paranoid: false }
 )
 
 Scale.associate = (models: any) => {

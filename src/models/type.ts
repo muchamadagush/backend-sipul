@@ -21,7 +21,7 @@ const Type = db.sequelize.define<TypeInstance>(
   {
     ...SequelizeAttributes.Types,
   },
-  { paranoid: true }
+  { paranoid: false }
 )
 
 Type.associate = (models: any) => {
