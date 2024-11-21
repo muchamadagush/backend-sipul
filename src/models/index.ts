@@ -1,15 +1,13 @@
-import File from './file'
-import User from './user'
-import Category from './category'
-import Post from './post'
-import PostCategory from './postcategory'
+import Type from './type'
+import Scale from './scale'
+import Product from './product'
+import WeightScale from './weightscale'
 
 const models = {
-  File,
-  User,
-  Category,
-  Post,
-  PostCategory,
+  Type,
+  Scale,
+  Product,
+  WeightScale,
 }
 
 export default models

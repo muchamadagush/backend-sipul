@@ -1,20 +1,20 @@
 import BaseRepository from '../../repositories/BaseRepository'
 import { Request } from 'express'
 import models from '../../models'
-import { CategoryAttributes, CategoryInstance } from '../../models/category'
 import { Transaction } from 'sequelize'
 import ResponseError from '../../modules/Response/ResponseError'
 import useValidation from '../../helpers/useValidation'
-import categorySchema from './category.schema'
+import scaleSchema from './scale.schema'
+import { ScaleAttributes, ScaleInstance } from '../../models/scale'
 
-const { Category } = models
+const { Scale } = models
 
-export default class CategoryService extends BaseRepository<
-  CategoryInstance,
-  CategoryAttributes
+export default class TypeService extends BaseRepository<
+  ScaleInstance,
+  ScaleAttributes
 > {
   constructor() {
-    super(Category, 'Category', [])
+    super(Scale, 'Scale', [])
   }
 
   async getAll(req: Request, customWhere?: object) {
@@ -24,15 +24,15 @@ export default class CategoryService extends BaseRepository<
   }
 
   async updated(id: string, formData: { title: string }, txn: Transaction) {
-    const category = await this._model.findByPk(id)
+    const scale = await this._model.findByPk(id)
 
-    if (!category) throw new ResponseError.NotFound('Category tidak ditemukan')
+    if (!scale) throw new ResponseError.NotFound('Scale tidak ditemukan')
 
-    const validatedData: any = useValidation(categorySchema.update, formData)
+    const validatedData: any = useValidation(scaleSchema.update, formData)
 
-    await category.update(validatedData, { transaction: txn })
+    await scale.update(validatedData, { transaction: txn })
 
-    return category
+    return scale
   }
 
   async deleted(id: string, txn: Transaction, isForce: boolean = false) {
