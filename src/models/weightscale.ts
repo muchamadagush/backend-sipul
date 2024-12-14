@@ -4,10 +4,12 @@ import SequelizeAttributes from '../utils/SequelizeAttributes'
 import db from './_instance'
 
 export interface WeightScaleAttributes {
-  id: string;
-  title: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  id: string
+  ProductId?: string | null
+  ScaleId: string
+  weight: number
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 interface WeightScaleCreationAttributes extends Optional<WeightScaleAttributes, 'id'> {}

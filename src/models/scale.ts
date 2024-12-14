@@ -5,6 +5,7 @@ import db from './_instance'
 
 export interface ScaleAttributes {
   id: string
+  TypeId: string
   title: string
   createdAt?: Date
   updatedAt?: Date

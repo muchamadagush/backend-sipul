@@ -9,7 +9,7 @@ import { ScaleAttributes, ScaleInstance } from '../../models/scale'
 
 const { Scale } = models
 
-export default class TypeService extends BaseRepository<
+export default class ScaleService extends BaseRepository<
   ScaleInstance,
   ScaleAttributes
 > {

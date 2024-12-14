@@ -9,25 +9,16 @@ module.exports = {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
       },
-      TypeId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        references: {
-          model: 'Types',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
       ProductId: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'Products',
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+        defaultValue: null
       },
       ScaleId: {
         type: DataTypes.UUID,
@@ -54,7 +45,6 @@ module.exports = {
     })
 
     // Add indexes for better query performance
-    await queryInterface.addIndex('WeightScales', ['TypeId'])
     await queryInterface.addIndex('WeightScales', ['ProductId'])
     await queryInterface.addIndex('WeightScales', ['ScaleId'])
   },

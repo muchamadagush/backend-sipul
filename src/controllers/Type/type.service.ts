@@ -28,7 +28,7 @@ export default class TypeService extends BaseRepository<
 
     if (!type) throw new ResponseError.NotFound('Type tidak ditemukan')
 
-    const validatedData: any = useValidation(typeSchema.update, formData)
+    const validatedData = useValidation(typeSchema.update, formData)
 
     await type.update(validatedData, { transaction: txn })
 
