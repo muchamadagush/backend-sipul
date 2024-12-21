@@ -1,20 +1,15 @@
-# Gunakan image Node.js resmi sebagai image induk
-FROM node:20-alpine
+FROM node:20
 
-# Set direktori kerja di dalam kontainer
 WORKDIR /usr/src/app
 
-# Salin package.json dan package-lock.json
 COPY package*.json ./
 
-# Instal dependensi aplikasi
-RUN npm install
+RUN yarn install
 
-# Salin sisa kode aplikasi Anda
 COPY . .
 
-# Expose port yang digunakan aplikasi Anda
+RUN yarn build
+
 EXPOSE 8000
 
-# Perintah untuk menjalankan aplikasi Anda
 CMD ["yarn", "serve:development"]

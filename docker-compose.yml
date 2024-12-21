@@ -1,9 +1,11 @@
 version: '3'
 
 services:
-  backend-app:
+  backend-sipul:
     build: .
     ports:
       - "8000:8000"
-    deploy:
-      replicas: 1
+    environment:
+      - NODE_ENV=production
+
+      version: '3.8'
